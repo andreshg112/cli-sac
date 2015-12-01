@@ -24,7 +24,7 @@ app.config(["$routeProvider",
                 })
                 .when('/Comenzar/Reto', {
                     templateUrl: 'view/retar2.html',
-                    controller: "competenciasController",
+                    controller: "usuariosController",
                     controllerAs: "vm"
                 })
                 .when('/Gestionar/Retos', {
@@ -34,7 +34,7 @@ app.config(["$routeProvider",
                 })
                 .when('/Gestionar/Areas', {
                     templateUrl: 'view/retar1.html',
-                    controller: "competenciasController",
+                    controller: "areasController",
                     controllerAs: "vm"
                 })
                 .when('/Realizar/Retos', {

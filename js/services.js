@@ -70,8 +70,8 @@ app.service("servicioUsuarios", ['$http', function ($http) {
             var req = $http.get(uri + "/" + id);
             return req;
         };
-        this.getAll = function () {
-            var req = $http.get(uri);
+        this.getAll = function (filtro) {
+            var req = $http.get(uri + "?limit=5&filtro=" + filtro);
             return req;
         };
         this.post = function (registro) {

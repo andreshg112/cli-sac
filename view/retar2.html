@@ -2,31 +2,28 @@
     <br>
     <center>                                       
         <div class="row center" style="width:70%;">                      
-
             <div class="card" style="background-color: #f5f5f5;">
                 <div class="card-image">
-                    <label class="center-align" style="background-color: #f5f5f5;"><h5>&nbsp;&nbsp;Seleccionar Competidor</h5></label>             
-                </div> 
-                <center>          
+                    <label class="center-align" style="background-color: #f5f5f5;"><h5>&nbsp;&nbsp;Seleccionar competidor</h5></label>             
+                </div>
+                <center>
                     <div class="card-action" style="padding:0px !important; border-top:0px solid rgba(160,160,160,0.2);">
                         <ul class="collection">
                             <li class="collection-item left-align">
                                 <label>                                            
                                     <div class="row">
-                                        <div class="input-field col s6">                                                    
-                                            <input  id="first_name" type="text" class="validate">
-                                            <label>Escibe aqui Nombre o Apellido</label>
+                                        <div class="input-field col s6">                                                                                              <input ng-model="vm.filtro" ng-change="vm.cargarUsuarios();" id="first_name" type="text" class="validate">
+                                            <label>Escribe aquí el nombre de quien buscas</label>
                                         </div>
                                     </div>
                                 </label>
                             </li>
-                            <li class="collection-item left-align"><label><h6>Usario uno</h6></label></li>
-                            <li class="collection-item left-align"><label><h6>Usuario dos</h6></label></li>
-                            <li class="collection-item left-align"><label><h6>Usuario tres</h6></label></li>
-                            <li class="collection-item left-align"><label><h6>Usuario cuatro</h6></label></li>
+                            <li class="collection-item left-align" ng-repeat="usuario in vm.usuarios">
+                                <label ng-click="vm.almacenarEnSesion(usuario)" style="cursor: pointer;"><h6>{{usuario.NOMBRE + " " + usuario.APELLIDO}}</h6></label>
+                            </li>
                             <li class="collection-item left-align">
                                 <label>
-                                    <a class="waves-effect waves-light btn center-align" href="#" ng-click="#" style="background-color: #0072C6; width:97%;"><label style="color:#fff;">Cargar Otros</label></a>
+                                    <a class="waves-effect waves-light btn center-align" style="background-color: #0072C6; width:97%;" ng-click="vm.cargarUsuarios();"><label style="color:#fff;">Cargar Otros</label></a>
                                 </label>
                             </li>                                   
                         </ul>                                
@@ -34,28 +31,16 @@
                 </center>
             </div>  
             <div class="row">     
-                <div class="col s6 left-align">
-                    <a class="waves-effect waves-light btn" href="#/Gestionar/Retos" ng-click="#" style="background-color:#0072C6;">Atras</a>  
+                <div class="col s6 center-align">
+                    <a class="waves-effect waves-light btn" href="#/Gestionar/Retos" style="background-color:#0072C6;">Atras</a>
                 </div>
-                <div class="col s6 right-align">
-                    <a class="waves-effect waves-light btn" href="#/Gestionar/Areas" ng-click="#" style="background-color:#0072C6;">Siguiente</a>     
-                </div>
+<!--                <div class="col s6 right-align">
+                    <a class="waves-effect waves-light btn" href="#/Gestionar/Areas" style="background-color:#0072C6;">Siguiente</a>
+                </div>-->
             </div>            
         </div>
     </center>
     <br><br><br><br>
 </div>
-
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/angular.min.js"></script>
-<script type="text/javascript" src="scripts/materialize.min.js"></script>
-<script type="text/javascript" src="scripts/angular-route.min.js"></script>
-<script type="text/javascript" src="Modules/appModule.js"></script>
-<script type="text/javascript" src="Controllers/competenciasController.js"></script>
-<script type="text/javascript">
-                    $(document).ready(function () {
-                        $('select').material_select();
-                    });
-</script>
 </body>
 </html>
