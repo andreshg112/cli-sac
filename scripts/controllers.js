@@ -1,26 +1,24 @@
-angular.module('app.controllers', [])
-  
-.controller('saberAppCtrl', function($scope) {
+app.controller('saberAppCtrl', function ($scope) {
 
-})
-   
-.controller('resultadosCtrl', function($scope) {
+});
 
-})
-   
-.controller('perfilCtrl', function($scope) {
+app.controller('resultadosCtrl', function ($scope) {
 
-})
-      
-.controller('¡Retar!Ctrl', function($scope) {
+});
 
-})
-   
-.controller('¡Retar!2Ctrl', function($scope) {
+app.controller('perfilCtrl', function ($scope) {
 
-})
-   
-.controller('ÁReaCtrl', function($scope) {
+});
 
-})
+app.controller('¡Retar!Ctrl', function ($scope) {
+
+});
+
+app.controller('¡Retar!2Ctrl', function ($scope) {
+
+});
+
+app.controller('ÁReaCtrl', function ($scope) {
+
+});
  
