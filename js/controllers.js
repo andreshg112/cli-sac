@@ -24,7 +24,7 @@ app.controller('loginController', ['servicioUsuarios', function (servicioUsuario
 app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function (servicioUsuarios, servicioAreas) {
         var vm = this;
         vm.datos = {};
-        vm.areas = [];
+        //vm.areas = [];
         vm.iniciarSesion = function () {
             console.log(vm.datos);
             var promisePost = servicioUsuarios.iniciarSesion(vm.datos);
@@ -42,7 +42,7 @@ app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function 
                         console.log('Error en la solicitud: ', errorPl);
                     });
         };
-        function cargarAreas() {
+        /*function cargarAreas() {
             var promiseGet = servicioAreas.getAll();
             promiseGet.then(
                     function (pl) {
@@ -56,10 +56,10 @@ app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function 
                     }
             );
         }
-        cargarAreas();
+        cargarAreas();*/
     }]);
 
-app.controller('areasController', ['servicioAreas', function (servicioAreas) {
+app.controller('areasController', ['servicioAreas', 'servicioRetos', function (servicioAreas, servicioRetos) {
         var vm = this;
         vm.areas = [];
         function cargarAreas() {
@@ -79,9 +79,29 @@ app.controller('areasController', ['servicioAreas', function (servicioAreas) {
         cargarAreas();
         vm.almacenarEnSesion = function (dato) {
             console.log(dato);
-            sessionStorage.email_2 = dato.CODAREA;
-            //location.href = "#/Gestionar/Areas";
+            sessionStorage.codarea = dato.CODAREA;
+            var reto = {
+                email_1 : JSON.parse(localStorage.usuario).EMAIL,
+                email_2 : sessionStorage.email_2,
+                codarea: sessionStorage.codarea
+            };
+            registrarReto(reto);
         };
+        function registrarReto(reto) {
+            var promisePost = servicioRetos.post(reto);
+            promisePost.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        console.log(respuesta.reto);
+                        sessionStorage.id_reto = respuesta.reto.ID_RETO;
+                        location.href = '#/Realizar/Retos';
+                    },
+                    function (errorPl) {
+                        console.log('Error: ', errorPl);
+                        alert("Error conectando al servidor");
+                    });
+        }
+        ;
     }]);
 
 app.controller('usuariosController', ['servicioUsuarios', function (servicioUsuarios) {
@@ -109,4 +129,39 @@ app.controller('usuariosController', ['servicioUsuarios', function (servicioUsua
             sessionStorage.email_2 = dato.EMAIL;
             location.href = "#/Gestionar/Areas";
         };
+    }]);
+
+app.controller('preguntasController', ['servicioPreguntas', function (servicioPreguntas) {
+        var vm = this;
+        vm.pregunta = {};
+        vm.registrar = function (pregunta) {
+            var promisePost = servicioPreguntas.post(pregunta);
+            vm.mostrar(promisePost);
+            promisePost.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        console.log(respuesta);
+                        alert(respuesta.mensaje);
+                    },
+                    function (errorPl) {
+                        console.log('Error: ');
+                        console.log(errorPl);
+                    });
+        };
+        function cargarPregunta() {
+            var promiseGet =
+                    servicioPreguntas.getNoRespondida(JSON.parse(localStorage.usuario).EMAIL, sessionStorage.id_reto, sessionStorage.codarea);
+            promiseGet.then(
+                    function (pl) {
+                        console.log(pl);
+                        var respuesta = pl.data;
+                        vm.pregunta = respuesta.pregunta;
+                        console.log(vm.pregunta);
+                    },
+                    function (errorPl) {
+                        console.log('Error: ', errorPl);
+                    }
+            );
+        }
+        cargarPregunta();
     }]);

@@ -6,54 +6,26 @@
             <center>
                 <div class="card-panel" style="width:70%; height: 200px;">                         
                     <div class="row center" style="width:80%;">
+                        {{vm.pregunta.encabezado.TITULO}}
                         <br>
-                        pregunta
+                        {{vm.pregunta.encabezado.DESCRIPCION}}
+                        <br>
+                        {{vm.pregunta.ENUNCIADO}}
+                        <br>
                     </div>
                 </div>
                 <a href="resultados.php"></a>
             </center>
         </div>
-        <div class="row center" style="width:70%;">                   
+        <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">                   
             <center>
-                <div class="card-panel" style="width:70%; height: 40px;">                         
-                    <div class="row center" style="width:80%; height: 10px;">					
-                        <label>opcion1</label>
-                    </div>
-                </div>
-            </center>
-        </div>
-        <div class="row center" style="width:70%;">	
-            <center>
-                <div class="card-panel" style="width:70%; height: 30px;">                         
-                    <div class="row center" style="width:80%; height: 10px;">					
-                        <label>opcion1</label>
-                    </div>
-                </div>
-            </center>
-        </div>
-        <div class="row center" style="width:70%;">	
-            <center>
-                <div class="card-panel" style="width:70%; height: 30px;">                         
-                    <div class="row center" style="width:80%; height: 10px;">					
-                        <label>opcion1</label>
+                <div class="card-panel" style="width:70%; height: 40px;">
+                    <div class="row center" style="width:80%; height: 10px;">
+                        <label>{{opcion.DESCRIPCION}}</label>
                     </div>
                 </div>
             </center>
         </div>
     </center>
-    <br>					
+    <br><br><br>
 </div>
-
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/angular.min.js"></script>
-<script type="text/javascript" src="scripts/materialize.min.js"></script>
-<script type="text/javascript" src="scripts/angular-route.min.js"></script>
-<script type="text/javascript" src="Modules/appModule.js"></script>
-<script type="text/javascript" src="Controllers/competenciasController.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('select').material_select();
-    });
-</script>
-</body>
-</html>

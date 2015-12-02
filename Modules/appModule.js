@@ -27,11 +27,6 @@ app.config(["$routeProvider",
                     controller: "usuariosController",
                     controllerAs: "vm"
                 })
-                .when('/Gestionar/Retos', {
-                    templateUrl: 'view/saberapp.html',
-                    controller: "competenciasController",
-                    controllerAs: "vm"
-                })
                 .when('/Gestionar/Areas', {
                     templateUrl: 'view/retar1.html',
                     controller: "areasController",
@@ -39,7 +34,7 @@ app.config(["$routeProvider",
                 })
                 .when('/Realizar/Retos', {
                     templateUrl: 'view/area.html',
-                    controller: "competenciasController",
+                    controller: "preguntasController",
                     controllerAs: "vm"
                 })
     }]);
