@@ -168,4 +168,7 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
             );
         }
         cargarPregunta();
+        vm.responder = function(opcion) {
+            
+        };
     }]);
