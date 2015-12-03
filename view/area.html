@@ -3,8 +3,8 @@
         <div class="row center" style="width:70%;">	                      
             <br><br>
             <center>
-                <div class="card-panel" style="width:70%;">
-                    <div class="row center" style="width:80%;">
+                <div class="card-panel" style="width:100%;">
+                    <div class="row center" style="width:100%;">
                         {{vm.pregunta.encabezado.TITULO}}
                         <br>
                         {{vm.pregunta.encabezado.DESCRIPCION}}
@@ -18,8 +18,8 @@
         </div>
         <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">                   
             <center>
-                <div class="card-panel" style="width:70%;" ng-click="vm.responder(opcion);">
-                    <div class="row center" style="width:80%; height: 10px;">
+                <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);">
+                    <div class="row center" style="width:100%;">
                         <label>{{opcion.DESCRIPCION}}</label>
                     </div>
                 </div>

@@ -168,7 +168,22 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
             );
         }
         cargarPregunta();
-        vm.responder = function(opcion) {
-            
+        vm.responder = function (opcion) {
+            var datos = {
+                codreto: sessionStorage.codreto,
+                codpregunta: vm.pregunta.CODPREGUNTA,
+                email: JSON.parse(localStorage.usuario).EMAIL,
+                opcion: opcion
+            };
+            var promisePost = servicioPreguntas.postRespondida(datos);
+            promisePost.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        console.log(respuesta);
+                        alert(respuesta.mensaje);
+                    },
+                    function (errorPl) {
+                        console.log('Error: ', errorPl);
+                    });
         };
     }]);

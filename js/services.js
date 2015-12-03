@@ -24,6 +24,17 @@ app.service("servicioPreguntas", function ($http) {
         });
         return req;
     };
+    this.postRespondida = function (datos) {
+        var req = $http({
+            method: 'POST',
+            url: "http://localhost/PHP/ar-sac/respondidas",
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded"
+            },
+            data: datos
+        });
+        return req;
+    };
     this.put = function (id, contact) {
         /*var request = $http({
          method: "put",
