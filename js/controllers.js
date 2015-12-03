@@ -43,20 +43,20 @@ app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function 
                     });
         };
         /*function cargarAreas() {
-            var promiseGet = servicioAreas.getAll();
-            promiseGet.then(
-                    function (pl) {
-                        console.log(pl);
-                        var respuesta = pl.data;
-                        vm.areas = respuesta.areas;
-                        console.log(vm.areas);
-                    },
-                    function (errorPl) {
-                        console.log('Error en la solicitud: ', errorPl);
-                    }
-            );
-        }
-        cargarAreas();*/
+         var promiseGet = servicioAreas.getAll();
+         promiseGet.then(
+         function (pl) {
+         console.log(pl);
+         var respuesta = pl.data;
+         vm.areas = respuesta.areas;
+         console.log(vm.areas);
+         },
+         function (errorPl) {
+         console.log('Error en la solicitud: ', errorPl);
+         }
+         );
+         }
+         cargarAreas();*/
     }]);
 
 app.controller('areasController', ['servicioAreas', 'servicioRetos', function (servicioAreas, servicioRetos) {
@@ -81,9 +81,13 @@ app.controller('areasController', ['servicioAreas', 'servicioRetos', function (s
             console.log(dato);
             sessionStorage.codarea = dato.CODAREA;
             var reto = {
-                email_1 : JSON.parse(localStorage.usuario).EMAIL,
-                email_2 : sessionStorage.email_2,
-                codarea: sessionStorage.codarea
+                email: JSON.parse(localStorage.usuario).EMAIL,
+                codarea: sessionStorage.codarea,
+                nomreto: "Reto de " + dato.NOMAREA,
+                participantes: [
+                    {email: JSON.parse(localStorage.usuario).EMAIL},
+                    {email: sessionStorage.email_2}
+                ]
             };
             registrarReto(reto);
         };
@@ -93,7 +97,8 @@ app.controller('areasController', ['servicioAreas', 'servicioRetos', function (s
                     function (pl) {
                         var respuesta = pl.data;
                         console.log(respuesta.reto);
-                        sessionStorage.id_reto = respuesta.reto.ID_RETO;
+                        sessionStorage.codreto = respuesta.reto.CODRETO;
+                        sessionStorage.nomreto = respuesta.reto.NOMRETO;
                         location.href = '#/Realizar/Retos';
                     },
                     function (errorPl) {
@@ -144,13 +149,12 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                         alert(respuesta.mensaje);
                     },
                     function (errorPl) {
-                        console.log('Error: ');
-                        console.log(errorPl);
+                        console.log('Error: ', errorPl);
                     });
         };
         function cargarPregunta() {
             var promiseGet =
-                    servicioPreguntas.getNoRespondida(JSON.parse(localStorage.usuario).EMAIL, sessionStorage.id_reto, sessionStorage.codarea);
+                    servicioPreguntas.getNoRespondida(JSON.parse(localStorage.usuario).EMAIL, sessionStorage.codreto, sessionStorage.codarea);
             promiseGet.then(
                     function (pl) {
                         console.log(pl);

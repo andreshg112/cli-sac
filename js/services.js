@@ -4,9 +4,9 @@ app.service("servicioPreguntas", function ($http) {
         var req = $http.get(uri + "/" + id);
         return req;
     };
-    this.getNoRespondida = function (email, id_reto, codarea) {
+    this.getNoRespondida = function (email, codreto, codarea) {
         var req = $http.get("http://localhost/PHP/ar-sac/no-respondida?email="
-                + email + "&id_reto=" + id_reto + "&codarea=" + codarea);
+                + email + "&codreto=" + codreto + "&codarea=" + codarea);
         return req;
     };
     this.getAll = function () {
