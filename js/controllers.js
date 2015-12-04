@@ -149,9 +149,9 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                     $('#' + opcion.CODOPCION).css("box-shadow", "1px 1px 1px 3px red");
                 }
                 for (var i = 0; i < vm.pregunta.opciones.length; i++) {
-                    var opcion = vm.pregunta.opciones[i];
-                    if (opcion.VALIDEZ === "CORRECTA") {
-                        $('#' + opcion.CODOPCION).css("box-shadow", "1px 1px 1px 3px green");
+                    var opcion1 = vm.pregunta.opciones[i];
+                    if (opcion1.VALIDEZ === "CORRECTA") {
+                        $('#' + opcion1.CODOPCION).css("box-shadow", "1px 1px 1px 3px green");
                     }
                 }
                 var datos = {
@@ -224,4 +224,39 @@ app.controller('retarController', ['servicioUsuarios', 'servicioRetos', function
             sessionStorage.codarea = vm.retoSeleccionado.CODAREA;
             location.href = '#/Realizar/Retos';
         };
+    }]);
+
+app.controller('resultadosController', ['servicioResultados', function (servicioResultados) {
+        var vm = this;
+        vm.correctas = 0;
+        vm.incorrectas = 0;
+        vm.total = 0;
+        vm.resultados = [];
+        cargarResultados = function () {
+            vm.usuarios = [];
+            var promise = servicioResultados.get(JSON.parse(localStorage.usuario).EMAIL);
+            promise.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        vm.correctas = respuesta.correctas;
+                        vm.incorrectas = respuesta.incorrectas;
+                        vm.total = vm.correctas + vm.incorrectas;
+                        vm.resultados = respuesta.resultados;
+                    },
+                    function (errorPl) {
+                        console.log('Error en la solicitud: ', errorPl);
+                    }
+            );
+        };
+        cargarResultados();
+        vm.almacenarEnSesion = function (dato) {
+            console.log(dato);
+            sessionStorage.email_2 = dato.EMAIL;
+            location.href = "#/Gestionar/Areas";
+        };
+    }]);
+
+app.controller('perfilController', [function () {
+        var vm = this;
+        vm.usuario = JSON.parse(localStorage.usuario);
     }]);

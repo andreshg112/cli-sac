@@ -1,5 +1,4 @@
 <div style="width: 75%;" class="center-align">
-    <br>
     <center>
         <div class="row center" style="width:70%;">	                       
             <br><br>
@@ -7,50 +6,52 @@
                 <div class="card-action">
                     <ul class="collection">
                         <li class="collection-item left-align">
+                            <label class="center-align" style="background-color: #f5f5f5;"><h5>&nbsp;&nbsp;Perfil</h5></label>
                             <label>                                            
-                                <div class="row">
-                                    <div class="input-field col s4">
-                                        <center>
-                                            <div class="card-panel left-align" style="width:45%; height: 100px;">                         
-                                                <div class="row center" style="width:80%;">                                                          
-                                                    .
-                                                </div>
-                                            </div>                                                    
-                                        </center>
-                                    </div>
-                                    <div class="input-field col s6"> 
-                                        <br>
-                                        <h6>SaberApp Apencio</h6><br>
-                                        <h6>Appoyamostusaber@gmail.com</h6>
-
-                                    </div>
-                                </div>
+                                <!--                                <div class="row">
+                                                                    <div class="input-field col s4">
+                                                                        <center>
+                                                                            <div class="card-panel left-align" style="width:45%; height: 100px;">                         
+                                                                                <div class="row center" style="width:80%;">                                                          
+                                                                                    .
+                                                                                </div>
+                                                                            </div>                                                    
+                                                                        </center>
+                                                                    </div>
+                                                                    
+                                                                                                        <div class="input-field col s6"> 
+                                                                                                            <br>
+                                                                                                            <h6>SaberApp Apencio</h6><br>
+                                                                                                            <h6>Appoyamostusaber@gmail.com</h6>
+                                                                    
+                                                                                                        </div>
+                                                                </div>-->
                             </label>
                         </li>
                         <li class="collection-item left-align">                                    
                             <div class="row">                                           
                                 <div class="col s1"><label><h6>Email:</h6></label></div>
                                 <div class="col s8">
-                                    <input  id="first_name" type="text" class="validate">
+                                    <input ng-model="vm.usuario.EMAIL" id="first_name" type="text" class="validate">
                                 </div>
                             </div> 
                         </li>
                         <li class="collection-item left-align">
                             <label>
                                 <div class="row">                                           
-                                    <div class="col s1"><label><h6>Nombres:</h6></label></div>
+                                    <div class="col s1"><label><h6>Nombre:</h6></label></div>
                                     <div class="col s8">
-                                        <input  id="first_name" type="text" class="validate">
+                                        <input id="first_name" type="text" class="validate" ng-model="vm.usuario.NOMBRE">
                                     </div>
-                                </div>                                            
+                                </div>
                             </label>
                         </li>
                         <li class="collection-item left-align">
                             <label>
                                 <div class="row">                                           
-                                    <div class="col s1"><label><h6>Apellidos:</h6></label></div>
+                                    <div class="col s1"><label><h6>Apellido:</h6></label></div>
                                     <div class="col s8">
-                                        <input  id="first_name" type="text" class="validate">
+                                        <input id="first_name" type="text" class="validate" ng-model="vm.usuario.APELLIDO">
                                     </div>
                                 </div>                                            
                             </label>
@@ -59,18 +60,17 @@
                             <div class="row">                                           
                                 <div class="col s1"><label><h6>Sexo:</h6></label></div>
                                 <div class="col s8">
-                                    <select name="sexo">
-                                        <option value="0" disabled selected>Seleccionar sexo</option>
-                                        <option value="masculino">M </option>
-                                        <option value="femenino">F</option>        
+                                    <select ng-model="vm.usuario.SEXO" class="browser-default" name="sexo">
+                                        <option value="M">M</option>
+                                        <option value="F">F</option>        
                                     </select>
                                     <br>
                                 </div>
                             </div>                                    
                         </li>
-                        <label>
-                            <a class="waves-effect waves-light btn center-align" href="#" ng-click="#" style="background-color: #0072C6; width:97%;"><label style="color:#fff;">Guardar Cambios</label></a>
-                        </label>
+                        <!--                        <label>
+                                                    <a class="waves-effect waves-light btn center-align" style="background-color: #0072C6; width:97%;"><label style="color:#fff;">Guardar Cambios</label></a>
+                                                </label>-->
                     </ul>                                
                 </div>
             </center>
@@ -78,15 +78,3 @@
     </center>
     <br><br>					
 </div>
-
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/angular.min.js"></script>
-<script type="text/javascript" src="scripts/materialize.min.js"></script>
-<script type="text/javascript" src="scripts/angular-route.min.js"></script>
-<script type="text/javascript" src="Modules/appModule.js"></script>
-<script type="text/javascript" src="Controllers/competenciasController.js"></script>
-<script type="text/javascript">
-                                $(document).ready(function () {
-                                    $('select').material_select();
-                                });
-</script>    

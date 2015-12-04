@@ -14,12 +14,12 @@ app.config(["$routeProvider",
                 })
                 .when('/Gestionar/Resultados', {
                     templateUrl: 'view/resultados.html',
-                    controller: "competenciasController",
+                    controller: "resultadosController",
                     controllerAs: "vm"
                 })
                 .when('/Gestionar/Perfil', {
                     templateUrl: 'view/perfil.html',
-                    controller: "competenciasController",
+                    controller: "perfilController",
                     controllerAs: "vm"
                 })
                 .when('/Comenzar/Reto', {

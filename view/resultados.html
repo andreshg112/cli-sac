@@ -1,35 +1,52 @@
 <div style="width: 75%;" class="center-align">
-    <br>                                                  
     <div class="row center" style="width:70%;">	                      
         <br><br>	
         <div class="card" style="background-color: #f5f5f5;">
             <div class="card-image">
                 <label class="center-align" style="background-color: #f5f5f5;"><h5 style="color: #000000;">&nbsp;&nbsp;Respondidas</h5></label>             
-            </div> 
+            </div>
             <center>          
                 <div class="card-action" style="padding:0px !important; border-top:0px solid rgba(160,160,160,0.2);">
-                    <ul class="collection">                                    
-                        <li class="collection-item left-align"><label><h6 style="color: #000000;">Correctas:40:40%</h6></label></li>
-                        <li class="collection-item left-align"><label><h6 style="color: #000000;">Incorrectas:60:60%</h6></label></li>                                                                     
-                    </ul> 
-                    <label class="left-align"><h6 style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;Total:100</h6></label>
+                    <div class="progress" style="height: 10px; width: 90%;">
+                        <div class="determinate red" style="width: 100%"></div>
+                        <div class="determinate green" style="width: {{100 * vm.correctas / (vm.total)}}%"></div>
+                    </div>
+                    <label class="left-align"><h6 style="color: #000000;">&nbsp;&nbsp;&nbsp;&nbsp;Total de preguntas respondidas:{{vm.total}}</h6></label>
                 </div>
             </center>
         </div> 
-        <div class="card">
-            <div class="card-image">
-                <label class="center-align" style="background-color: #f5f5f5;"><h5 style="color: #000000;">&nbsp;&nbsp;Grafica</h5></label>             
-            </div> 
-            <center>          
-                <div id="canvas-holder">
-                    <canvas id="chart-area3" width="600" height="300"></canvas>
+        <!--        <div class="card">
+                    <div class="card-image">
+                        <label class="center-align" style="background-color: #f5f5f5;"><h5 style="color: #000000;">&nbsp;&nbsp;Grafica</h5></label>             
+                    </div> 
+                    <center>
+                        <div id="canvas-holder">
+                            <canvas id="chart-area3" width="600" height="300"></canvas>
+                        </div>
+                    </center>
                 </div>
-        </div>
-        </center>
+            </div>-->
+        <br><br>
+        <table class="centered">
+            <caption>Resultados por área</caption>
+            <thead>
+                <tr>
+                    <th>Área</th>
+                    <th>Correctas</th>
+                    <th>Incorrectas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="resultado in vm.resultados">
+                    <td>{{resultado.NOMAREA}}</td>
+                    <td>{{resultado.CORRECTAS}}</td>
+                    <td>{{resultado.INCORRECTAS}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br><br><br>
     </div>
-    <br><br><br>
 </div>
-
 <!--
 <footer class="page-footer"  style=" background-color: #eeeeee; !important">		
                 <div class="footer-copyright">
@@ -39,39 +56,28 @@
                         </div>
                 </div>
         </footer-->
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/angular.min.js"></script>
-<script type="text/javascript" src="scripts/materialize.min.js"></script>
-<script type="text/javascript" src="scripts/angular-route.min.js"></script>
-<script type="text/javascript" src="Modules/appModule.js"></script>
-<script type="text/javascript" src="Controllers/competenciasController.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('select').material_select();
-    });
-</script>
-<script src="Chart.js"></script>
+<!--<script src="Chart.js"></script>
 <script>
-    var barChartData = {
-        labels: ["MATEMATICAS", "QUIMICA", "BIOLOGIA", "GEOGRAFIA", "SOCIALES", "ESTADISTICA", "FISICA"],
-        datasets: [
-            {
-                fillColor: "#00e676",
-                strokeColor: "#ffffff",
-                highlightFill: "#1864f2",
-                highlightStroke: "#ffffff",
-                data: [90, 30, 10, 80, 15, 5, 15]
-            },
-            {
-                fillColor: "#f44336",
-                strokeColor: "#ffffff",
-                highlightFill: "#ee7f49",
-                highlightStroke: "#ffffff",
-                data: [40, 50, 70, 40, 85, 55, 15]
-            }
-        ]
+var barChartData = {
+    labels: ["MATEMATICAS", "QUIMICA", "BIOLOGIA", "GEOGRAFIA", "SOCIALES", "ESTADISTICA", "FISICA"],
+    datasets: [
+        {
+            fillColor: "#00e676",
+            strokeColor: "#ffffff",
+            highlightFill: "#1864f2",
+            highlightStroke: "#ffffff",
+            data: [90, 30, 10, 80, 15, 5, 15]
+        },
+        {
+            fillColor: "#f44336",
+            strokeColor: "#ffffff",
+            highlightFill: "#ee7f49",
+            highlightStroke: "#ffffff",
+            data: [40, 50, 70, 40, 85, 55, 15]
+        }
+    ]
 
-    }
-    var ctx3 = document.getElementById("chart-area3").getContext("2d");
-    window.myPie = new Chart(ctx3).Bar(barChartData, {responsive: true});
-</script>
+};
+var ctx3 = document.getElementById("chart-area3").getContext("2d");
+window.myPie = new Chart(ctx3).Bar(barChartData, {responsive: true});
+</script>-->
