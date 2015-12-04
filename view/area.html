@@ -18,12 +18,20 @@
         </div>
         <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">                   
             <center>
-                <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);">
+                <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);" name="opciones">
                     <div class="row center" style="width:100%;">
                         <label>{{opcion.DESCRIPCION}}</label>
                     </div>
                 </div>
             </center>
+        </div>
+        <div class="row" style="width:70%;">
+            <div class="col s6 left-align">
+                <a href="#/Gestionar/Retos" class="waves-effect waves-light btn" style="background-color:#0072C6;">Finalizar</a>
+            </div>
+            <div class="col s6 right-align" ng-click="vm.cargarPregunta()">
+                <a class="waves-effect waves-light btn" style="background-color:#0072C6;">Siguiente</a>
+            </div>
         </div>
     </center>
     <br><br><br>
