@@ -139,20 +139,9 @@ app.controller('usuariosController', ['servicioUsuarios', function (servicioUsua
 app.controller('preguntasController', ['servicioPreguntas', function (servicioPreguntas) {
         var vm = this;
         vm.pregunta = {};
-        vm.registrar = function (pregunta) {
-            var promisePost = servicioPreguntas.post(pregunta);
-            vm.mostrar(promisePost);
-            promisePost.then(
-                    function (pl) {
-                        var respuesta = pl.data;
-                        console.log(respuesta);
-                        alert(respuesta.mensaje);
-                    },
-                    function (errorPl) {
-                        console.log('Error: ', errorPl);
-                    });
-        };
-        function cargarPregunta() {
+        vm.opcionDesactivada = false; //Esto no sirve
+        vm.cargarPregunta = function () {
+            vm.pregunta = {};
             var promiseGet =
                     servicioPreguntas.getNoRespondida(JSON.parse(localStorage.usuario).EMAIL, sessionStorage.codreto, sessionStorage.codarea);
             promiseGet.then(
@@ -166,9 +155,16 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                         console.log('Error: ', errorPl);
                     }
             );
-        }
-        cargarPregunta();
+            vm.opcionDesactivada = false;
+        };
+        vm.cargarPregunta();
         vm.responder = function (opcion) {
+            $('[name=opciones]').attr("ng-click", "");
+            if (opcion.VALIDEZ === "CORRECTA") {
+                $('[name=opciones]').css("background-color", "green");
+            } else {
+                $('[name=opciones]').css("background-color", "red");
+            }
             var datos = {
                 codreto: sessionStorage.codreto,
                 codpregunta: vm.pregunta.CODPREGUNTA,
@@ -180,7 +176,7 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                     function (pl) {
                         var respuesta = pl.data;
                         console.log(respuesta);
-                        alert(respuesta.mensaje);
+                        //alert(respuesta.mensaje);
                     },
                     function (errorPl) {
                         console.log('Error: ', errorPl);
