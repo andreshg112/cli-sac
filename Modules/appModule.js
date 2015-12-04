@@ -4,12 +4,12 @@ app.config(["$routeProvider",
         $routeProvider
                 .when('/', {
                     templateUrl: 'view/saberapp.html',
-                    controller: "competenciasController",
+                    controller: "retarController",
                     controllerAs: "vm"
                 })
                 .when('/Gestionar/Retos', {
                     templateUrl: 'view/saberapp.html',
-                    controller: "competenciasController",
+                    controller: "retarController",
                     controllerAs: "vm"
                 })
                 .when('/Gestionar/Resultados', {

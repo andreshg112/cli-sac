@@ -21,10 +21,9 @@ app.controller('loginController', ['servicioUsuarios', function (servicioUsuario
 
     }]);
 
-app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function (servicioUsuarios, servicioAreas) {
+app.controller('retoController', ['servicioUsuarios', function (servicioUsuarios) {
         var vm = this;
         vm.datos = {};
-        //vm.areas = [];
         vm.iniciarSesion = function () {
             console.log(vm.datos);
             var promisePost = servicioUsuarios.iniciarSesion(vm.datos);
@@ -42,21 +41,6 @@ app.controller('retoController', ['servicioUsuarios', 'servicioAreas', function 
                         console.log('Error en la solicitud: ', errorPl);
                     });
         };
-        /*function cargarAreas() {
-         var promiseGet = servicioAreas.getAll();
-         promiseGet.then(
-         function (pl) {
-         console.log(pl);
-         var respuesta = pl.data;
-         vm.areas = respuesta.areas;
-         console.log(vm.areas);
-         },
-         function (errorPl) {
-         console.log('Error en la solicitud: ', errorPl);
-         }
-         );
-         }
-         cargarAreas();*/
     }]);
 
 app.controller('areasController', ['servicioAreas', 'servicioRetos', function (servicioAreas, servicioRetos) {
@@ -180,6 +164,11 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                 promisePost.then(
                         function (pl) {
                             var respuesta = pl.data;
+                            if (respuesta.termino) {
+                                alert("Has terminado de responder el reto.\n\
+Espera a tus compañeros.");
+                                location.href = '#/Gestionar/Retos';
+                            }
                             console.log(respuesta);
                         },
                         function (errorPl) {
@@ -188,4 +177,28 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
             }
 
         };
+    }]);
+
+app.controller('retarController', ['servicioUsuarios', function (servicioUsuarios) {
+        var vm = this;
+        vm.terminados = [];
+        vm.responde = [];
+        vm.retoSeleccionado = {};
+        function cargarRetos() {
+            var promise = servicioUsuarios.getRetos(JSON.parse(localStorage.usuario).EMAIL);
+            promise.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        vm.terminados = respuesta.terminados;
+                        vm.responde = respuesta.responde;
+                    },
+                    function (errorPl) {
+                        console.log('Error en la solicitud: ', errorPl);
+                    }
+            );
+        }
+        cargarRetos();
+        vm.mostrar = function (dato) {
+            console.log(dato);
+        }
     }]);
