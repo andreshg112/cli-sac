@@ -139,7 +139,7 @@ app.controller('usuariosController', ['servicioUsuarios', function (servicioUsua
 app.controller('preguntasController', ['servicioPreguntas', function (servicioPreguntas) {
         var vm = this;
         vm.pregunta = {};
-        vm.opcionDesactivada = false; //Esto no sirve
+        vm.respondio = false;
         vm.cargarPregunta = function () {
             vm.pregunta = {};
             var promiseGet =
@@ -155,31 +155,37 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                         console.log('Error: ', errorPl);
                     }
             );
-            vm.opcionDesactivada = false;
+            vm.respondio = false;
         };
         vm.cargarPregunta();
         vm.responder = function (opcion) {
-            $('[name=opciones]').attr("ng-click", "");
-            if (opcion.VALIDEZ === "CORRECTA") {
-                $('[name=opciones]').css("background-color", "green");
-            } else {
-                $('[name=opciones]').css("background-color", "red");
+            if (!vm.respondio) {
+                vm.respondio = true;
+                if (opcion.VALIDEZ === "INCORRECTA") {
+                    $('#' + opcion.CODOPCION).css("box-shadow", "1px 1px 1px 3px red");
+                }
+                for (var i = 0; i < vm.pregunta.opciones.length; i++) {
+                    var opcion = vm.pregunta.opciones[i];
+                    if (opcion.VALIDEZ === "CORRECTA") {
+                        $('#' + opcion.CODOPCION).css("box-shadow", "1px 1px 1px 3px green");
+                    }
+                }
+                var datos = {
+                    codreto: sessionStorage.codreto,
+                    codpregunta: vm.pregunta.CODPREGUNTA,
+                    email: JSON.parse(localStorage.usuario).EMAIL,
+                    opcion: opcion
+                };
+                var promisePost = servicioPreguntas.postRespondida(datos);
+                promisePost.then(
+                        function (pl) {
+                            var respuesta = pl.data;
+                            console.log(respuesta);
+                        },
+                        function (errorPl) {
+                            console.log('Error: ', errorPl);
+                        });
             }
-            var datos = {
-                codreto: sessionStorage.codreto,
-                codpregunta: vm.pregunta.CODPREGUNTA,
-                email: JSON.parse(localStorage.usuario).EMAIL,
-                opcion: opcion
-            };
-            var promisePost = servicioPreguntas.postRespondida(datos);
-            promisePost.then(
-                    function (pl) {
-                        var respuesta = pl.data;
-                        console.log(respuesta);
-                        //alert(respuesta.mensaje);
-                    },
-                    function (errorPl) {
-                        console.log('Error: ', errorPl);
-                    });
+
         };
     }]);

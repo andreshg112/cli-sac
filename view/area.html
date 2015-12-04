@@ -18,7 +18,7 @@
         </div>
         <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">                   
             <center>
-                <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);" name="opciones">
+                <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);" name="opciones" id="{{opcion.CODOPCION}}">
                     <div class="row center" style="width:100%;">
                         <label>{{opcion.DESCRIPCION}}</label>
                     </div>
