@@ -130,6 +130,10 @@ app.service("servicioRetos", function ($http) {
         var req = $http.get(uri + "/" + id);
         return req;
     };
+    this.getParticipantes = function (id) {
+        var req = $http.get(uri + "/" + id + '/participantes');
+        return req;
+    };
     this.getAll = function () {
         var req = $http.get(uri);
         return req;

@@ -14,7 +14,7 @@
                             <li ng-repeat="reto in vm.responde" 
                                 class="collection-item left-align" 
                                 onclick="$('#modal1').openModal();"
-                                ng-click="vm.retoSeleccionado = reto;"
+                                ng-click="vm.cargarParticipantes(reto, 'responde');"
                                 style="cursor: pointer;">
                                 <label><h6>{{reto.NOMRETO}}</h6></label>
                             </li>
@@ -45,7 +45,7 @@
                             <li ng-repeat="reto in vm.terminados" 
                                 class="collection-item left-align" 
                                 onclick="$('#modal1').openModal();"
-                                ng-click="vm.retoSeleccionado = reto;"
+                                ng-click="vm.cargarParticipantes(reto, 'terminado');"
                                 style="cursor: pointer;">
                                 <label><h6>{{reto.NOMRETO}}</h6></label>
                             </li>
@@ -63,11 +63,28 @@
     <div class="modal-content">
         <h4>{{vm.retoSeleccionado.NOMRETO}}</h4>
         <!--<p>A bunch of text</p>-->
-        <ul class="collection">
-            <li class="collection-item left-align"><label><h6>Anya Bolanios</h6></label></li>
-        </ul>
+        <table class="centered">
+            <thead>
+                <tr>
+                    <th>Competidor</th>
+                    <th>Correctas</th>
+                    <th>Incorrectas</th>
+                    <th>Posición</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="participante in vm.participantes">
+                    <td>{{participante.usuario.NOMBRE}}</td>
+                    <td>{{participante.CORRECTAS}}</td>
+                    <td>{{participante.INCORRECTAS}}</td>
+                    <td>{{$index + 1}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        <button ng-if="vm.tipoReto === 'responde'" 
+                class="modal-action modal-close waves-effect waves-blue btn light-blue" ng-click="vm.continuarReto()"
+                onclick="$('#modal1').closeModal();">Continuar</button>
     </div>
 </div>

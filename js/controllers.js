@@ -179,10 +179,12 @@ Espera a tus compañeros.");
         };
     }]);
 
-app.controller('retarController', ['servicioUsuarios', function (servicioUsuarios) {
+app.controller('retarController', ['servicioUsuarios', 'servicioRetos', function (servicioUsuarios, servicioRetos) {
         var vm = this;
         vm.terminados = [];
         vm.responde = [];
+        vm.participantes = [];
+        vm.tipoReto = '';
         vm.retoSeleccionado = {};
         function cargarRetos() {
             var promise = servicioUsuarios.getRetos(JSON.parse(localStorage.usuario).EMAIL);
@@ -200,5 +202,26 @@ app.controller('retarController', ['servicioUsuarios', function (servicioUsuario
         cargarRetos();
         vm.mostrar = function (dato) {
             console.log(dato);
-        }
+        };
+        vm.cargarParticipantes = function (reto, tipoReto) {
+            vm.tipoReto = tipoReto;
+            vm.participantes = [];
+            vm.retoSeleccionado = reto;
+            console.log(reto);
+            var promise = servicioRetos.getParticipantes(vm.retoSeleccionado.CODRETO);
+            promise.then(
+                    function (pl) {
+                        var respuesta = pl.data;
+                        vm.participantes = respuesta.participantes;
+                    },
+                    function (errorPl) {
+                        console.log('Error en la solicitud: ', errorPl);
+                    }
+            );
+        };
+        vm.continuarReto = function () {
+            sessionStorage.codreto = vm.retoSeleccionado.CODRETO;
+            sessionStorage.codarea = vm.retoSeleccionado.CODAREA;
+            location.href = '#/Realizar/Retos';
+        };
     }]);
