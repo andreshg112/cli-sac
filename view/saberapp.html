@@ -17,6 +17,7 @@
                                 ng-click="vm.cargarParticipantes(reto, 'responde');"
                                 style="cursor: pointer;">
                                 <label><h6>{{reto.NOMRETO}}</h6></label>
+                                <label>{{reto.participantes[0].EMAIL}} lleva la delantera</label>
                             </li>
                         </ul>
                     </div>
@@ -48,6 +49,7 @@
                                 ng-click="vm.cargarParticipantes(reto, 'terminado');"
                                 style="cursor: pointer;">
                                 <label><h6>{{reto.NOMRETO}}</h6></label>
+                                <label>{{reto.participantes[0].EMAIL}} es el ganador</label>
                             </li>
                         </ul>
                     </div>
