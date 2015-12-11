@@ -133,6 +133,7 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
                         console.log(pl);
                         var respuesta = pl.data;
                         vm.pregunta = respuesta.pregunta;
+                          shuffleArray(vm.pregunta.opciones);
                         console.log(vm.pregunta);
                     },
                     function (errorPl) {
@@ -141,12 +142,33 @@ app.controller('preguntasController', ['servicioPreguntas', function (servicioPr
             );
             vm.respondio = false;
         };
+        var shuffleArray = function (array) {
+            var m = array.length, t, i;
+
+            // While there remain elements to shuffle
+            while (m) {
+                // Pick a remaining element…
+                i = Math.floor(Math.random() * m--);
+
+                // And swap it with the current element.
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+            }
+
+            return array;
+        };
         vm.cargarPregunta();
         vm.responder = function (opcion) {
             if (!vm.respondio) {
                 vm.respondio = true;
                 if (opcion.VALIDEZ === "INCORRECTA") {
                     $('#' + opcion.CODOPCION).css("box-shadow", "1px 1px 1px 3px red");
+                    $('#d' + opcion.CODOPCION).addClass("cross");
+                    $('#d' + opcion.CODOPCION).text("X");
+                } else {
+                    $('#d' + opcion.CODOPCION).addClass("checkmark");
+                    $('#d' + opcion.CODOPCION).html("&#10004;");
                 }
                 for (var i = 0; i < vm.pregunta.opciones.length; i++) {
                     var opcion1 = vm.pregunta.opciones[i];

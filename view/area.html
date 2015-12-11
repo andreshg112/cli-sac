@@ -16,11 +16,12 @@
                 <a href="resultados.php"></a>
             </center>
         </div>
-        <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">                   
+        <div class="row center" style="width:70%;" ng-repeat="opcion in vm.pregunta.opciones">
             <center>
                 <div class="card-panel" style="width:100%;" ng-click="vm.responder(opcion);" name="opciones" id="{{opcion.CODOPCION}}">
                     <div class="row center" style="width:100%;">
-                        <label>{{opcion.DESCRIPCION}}</label>
+                        <label style="font-size: 1rem;">{{opcion.DESCRIPCION}}</label>
+                        <div id="d{{opcion.CODOPCION}}"><span></span></div>
                     </div>
                 </div>
             </center>

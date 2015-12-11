@@ -1,3 +1,5 @@
+
+
 #contenido
 {
     /*Le ponemos estilos al article contenedor de la imagen*/
@@ -62,3 +64,24 @@ main {
     flex: 1 0 auto;
 }
 
+.checkmark {
+    color: green;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+
+.cross {
+    color: red;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
